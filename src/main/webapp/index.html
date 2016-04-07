@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+              integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" 
+              integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <h1>Start Page</h1>
+<!--method="POST" action="myservlet"-->
+        <form class="form-inline"  id="form" >
+            <div class="form-group">
+                <label for="exampleInputName2">Att göra</label>
+                <input type="text" name="description" class="form-control" id="exampleInputName2" placeholder="Todo">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Due date</label>
+                <input type="text" name="duedate" class="form-control" id="exampleInputEmail2" placeholder="01/11/16">
+            </div>
+            <button type="submit" class="btn btn-default" id="submitbtn">Send invitation</button>
+        </form>
+        <br><br>
+        <div class="container">
+            <p>Din att göra lista:</p>
+            <table class="table table-striped" id="table">
+                <thead>
+                <th>Beskrivning</th>
+                <th>Slutdatum</th>
+                <th>Klart</th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="option1" name="done"> Klart
+        </label>
+        
+            <script src="script.js"></script>
+
+    </body>
+</html>
