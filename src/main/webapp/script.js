@@ -22,7 +22,9 @@ function updateList() {
     $.getJSON("http://localhost:8080/SimonBorgstromIn1JavaBackend/myservlet", function (data) {
         $.each(data, function (i, fromservlet) {
             $("#table tbody").append("<tr><td>" + fromservlet.Description +
-                    "</td><td id=\"editdate\">" + fromservlet.Duedate + "</td><td>" + "<input type=\"checkbox\" id=\"inlineCheckbox1\" value=\"option1\" name=\"done\"> Klart" + "</td></tr>");
+                    "</td><td id=\"editdate\">" + fromservlet.Duedate + "</td><td id=\"inlineCheckbox\">" + 
+                    "<input type=\"checkbox\" id=\"inlineCheckbox1\"  \n\
+                    name=\"done\""+fromservlet.Done+" > Klart" + "</td></tr>");
         });
     });
 }
@@ -30,7 +32,7 @@ function updateList() {
 $(document).ready(function () {
     $("#table").delegate('#editdate', 'click', function (e) {
         e.preventDefault();
-        var text = prompt("prompt", "textbox's intial text");
+        var text = prompt("Change date?", "new date");
       //  $(this).html(text);
         $.ajax({
             url: 'http://localhost:8080/SimonBorgstromIn1JavaBackend/myservlet',
@@ -38,6 +40,24 @@ $(document).ready(function () {
             // dataType: 'json',
             data:{'key': $(this).parent().index()
                 , 'duedate':text},
+            success: function (data)
+            {
+                updateList();
+            }
+        });
+
+    });
+});
+$(document).ready(function () {
+    $("#table").delegate('#inlineCheckbox', 'click', function (e) {
+       alert($(this).parent().index());// e.preventDefault();
+      //  $(this).html(text);
+        $.ajax({
+            url: 'http://localhost:8080/SimonBorgstromIn1JavaBackend/myservlet',
+            type: 'post',
+            // dataType: 'json',
+            data:{'key': $(this).parent().index()
+                , 'done':$("#inlineCheckbox").is(":checked")},
             success: function (data)
             {
                 updateList();

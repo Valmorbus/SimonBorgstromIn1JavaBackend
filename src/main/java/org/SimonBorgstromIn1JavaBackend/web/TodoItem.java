@@ -14,11 +14,15 @@ public class TodoItem {
     private String description;
     private String dueDate;
     private String done;
+    
 
     public TodoItem(String description, String dueDate, String done) {
         this.description = description;
         this.dueDate = dueDate;
         this.done = done;
+        if (this.done == null){
+            this.done = "false";
+        }
     }
 
     public void setDescription(String description) {
@@ -46,7 +50,8 @@ public class TodoItem {
     }
     
     public String toJson(){
-        return "{"+"\"Description\""+":\""+description+"\","+"\"Duedate\""+":\""+dueDate+"\"}";
+        return "{"+"\"Description\""+":\""+description+"\","+"\"Duedate\""+":\""+dueDate+"\""+
+                ","+"\"Done\""+":\""+done+"\"}";
     }
     
 }
