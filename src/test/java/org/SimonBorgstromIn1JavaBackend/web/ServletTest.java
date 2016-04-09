@@ -34,7 +34,7 @@ public class ServletTest {
     private PrintWriter out;
     
    
-    
+    /*
     
     @Before
     public void run_before_each_test() throws FileNotFoundException, IOException{
@@ -188,4 +188,5 @@ public class ServletTest {
         Class<javax.servlet.annotation.WebServlet> expected = javax.servlet.annotation.WebServlet.class;
         assertEquals(expected, actual); 
     }
+    */
 }

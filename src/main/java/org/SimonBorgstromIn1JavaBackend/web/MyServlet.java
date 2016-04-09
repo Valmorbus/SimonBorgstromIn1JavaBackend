@@ -20,31 +20,32 @@ public class MyServlet extends HttpServlet {
     public static final String DESCRIPTION = "description";
     public static final String DUEDATE = "duedate";
     public static final String DONE = "done";
+    public static final String KEY ="key";
     public HashMap<Integer, TodoItem> saveMap = new HashMap<Integer, TodoItem>();
     private int count = 0;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+       
         String description = req.getParameter(DESCRIPTION);
         String duedate = req.getParameter(DUEDATE);
         String doneString = req.getParameter(DONE);
-   
+        String keyString = req.getParameter(KEY);
+        System.out.println("keyString" +keyString);
+        if (keyString==null){
         TodoItem ti = new TodoItem(description, duedate, doneString);
-        //isDone(doneString, resp);
-       // resp.setContentType("application/json");
-       // resp.setCharacterEncoding("utf-8");
-        //resp.sendRedirect("");
      
-      //  String objectToReturn ="{"+"\"Description\""+":\""+description+"\","+"\"Duedate\""+":\""+duedate+"\"}";
         saveMap.put(++count, ti);
-       System.out.println(count);
-      //  PrintWriter out = resp.getWriter();
-       // out.println("<!DOCTYPE html><body><p>"+" "+description+"</p></body>");
-       // out.println("</html>");
-       // out.print(objectToReturn);
-       // out.flush();
-       // out.close();
+      // System.out.println(count);
+        }
+        else if (keyString != null){
+                  TodoItem ti = saveMap.get(Integer.valueOf(keyString)+1);
+                  ti.setDueDate(duedate);
+
+        }
+        
+       
+           
     }
 
     Optional<Boolean> isDone(String doneString, HttpServletResponse resp) throws IOException {
@@ -79,7 +80,7 @@ public class MyServlet extends HttpServlet {
         objectToReturn +="]";
         System.out.println(objectToReturn +count);
        
-         PrintWriter out = resp.getWriter();
+        PrintWriter out = resp.getWriter();
      
         out.print(objectToReturn);
 
