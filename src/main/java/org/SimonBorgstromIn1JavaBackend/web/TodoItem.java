@@ -21,7 +21,7 @@ public class TodoItem {
         this.dueDate = dueDate;
         this.done = done;
         if (this.done == null){
-            this.done = "false";
+            this.done = "";
         }
     }
 

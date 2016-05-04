@@ -7,12 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import javax.json.JsonObjectBuilder;
-import javax.servlet.Servlet;
 
 @WebServlet(name = "MyServlet", urlPatterns = {"/myservlet", "/index"})
 public class MyServlet extends HttpServlet {
@@ -23,6 +24,8 @@ public class MyServlet extends HttpServlet {
     public static final String KEY = "key";
     public HashMap<Integer, TodoItem> saveMap = new HashMap<Integer, TodoItem>();
     private int count = 0;
+
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,38 +42,26 @@ public class MyServlet extends HttpServlet {
             // System.out.println(count);
         } else if (keyString != null) {
             TodoItem ti = saveMap.get(Integer.valueOf(keyString) + 1);
-            if (duedate != null)
-            ti.setDueDate(duedate);
-            System.out.println("valin" +(Integer.valueOf(keyString)+1));
+            if (duedate != null) {
+                ti.setDueDate(duedate);
+            }
+            System.out.println("valin" + (Integer.valueOf(keyString) + 1));
             if (doneString != null) {
-                      // ti = saveMap.get(Integer.valueOf(keyString)+1);
-                          ti.setDone("checked");
-                System.out.println("inchecked" +doneString);
+                // ti = saveMap.get(Integer.valueOf(keyString)+1);
+
+                ti.setDone("checked");
+                System.out.println("inchecked" + doneString);
             }
         }
+         resp.setStatus(resp.SC_OK);
 
-    }
-
-    Optional<Boolean> isDone(String doneString, HttpServletResponse resp) throws IOException {
-        Boolean done = null;
-        if ("true".equals(doneString)) {
-            return Optional.of(true);
-        } else if ("false".equals(doneString)) {
-            return Optional.of(false);
-        } else {
-            resp.sendError(400, "Done parameter should be true or false");
-            return Optional.empty();
-        }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //isDone(doneString, resp);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
-        //resp.sendRedirect("");
         String objectToReturn = "[";
-        // String objectToReturn ="";
         for (Map.Entry<Integer, TodoItem> entry : saveMap.entrySet()) {
             Integer key = entry.getKey();
             String value = entry.getValue().toJson();

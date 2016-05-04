@@ -50,8 +50,6 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $("#table").delegate('#inlineCheckbox', 'click', function (e) {
-       alert($(this).parent().index());// e.preventDefault();
-      //  $(this).html(text);
         $.ajax({
             url: 'http://localhost:8080/SimonBorgstromIn1JavaBackend/myservlet',
             type: 'post',
